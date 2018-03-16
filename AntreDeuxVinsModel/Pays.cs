@@ -4,7 +4,10 @@ using System.Text;
 
 namespace AntreDeuxVinsModel
 {
-    class Pays
+    public class Pays
     {
+        public int Id { get; set; }
+        public String Nom { get; set; }
+        public ICollection<Region> Regions { get; set; }
     }
 }

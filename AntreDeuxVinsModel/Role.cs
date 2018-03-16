@@ -4,7 +4,9 @@ using System.Text;
 
 namespace AntreDeuxVinsModel
 {
-    class Role
+    public class Role
     {
+        public int Id { get; set; }
+        public String Nom { get; set; }
     }
 }

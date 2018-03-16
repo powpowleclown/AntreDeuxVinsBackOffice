@@ -4,7 +4,13 @@ using System.Text;
 
 namespace AntreDeuxVinsModel
 {
-    class Utilisateur
+    public class Utilisateur
     {
+        public int Id { get; set; }
+        public String Nom { get; set; }
+        public String Prenom { get; set; }
+        public String Mail { get; set; }
+        public String Password { get; set; }
+        public Role Role { get; set; }
     }
 }

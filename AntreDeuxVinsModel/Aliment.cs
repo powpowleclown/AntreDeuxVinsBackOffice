@@ -4,7 +4,10 @@ using System.Text;
 
 namespace AntreDeuxVinsModel
 {
-    class Aliment
+    public class Aliment
     {
+        public int Id { get; set; }
+        public String Nom { get; set; }
+        public String Description { get; set; }
     }
 }

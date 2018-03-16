@@ -4,7 +4,9 @@ using System.Text;
 
 namespace AntreDeuxVinsModel
 {
-    class VinAliment
+    public class Couleur
     {
+        public int Id { get; set; }
+        public String Nom { get; set; }
     }
 }
