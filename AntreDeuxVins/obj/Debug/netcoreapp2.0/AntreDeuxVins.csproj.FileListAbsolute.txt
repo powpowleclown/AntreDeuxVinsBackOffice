@@ -1,0 +1,8 @@
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\bin\Debug\netcoreapp2.0\AntreDeuxVins.deps.json
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\bin\Debug\netcoreapp2.0\AntreDeuxVins.runtimeconfig.json
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\bin\Debug\netcoreapp2.0\AntreDeuxVins.runtimeconfig.dev.json
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\bin\Debug\netcoreapp2.0\AntreDeuxVins.dll
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.csprojResolveAssemblyReference.cache
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.csproj.CoreCompileInputs.cache
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.AssemblyInfoInputs.cache
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.AssemblyInfo.cs

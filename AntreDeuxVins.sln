@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntreDeuxVins", "AntreDeuxVins\AntreDeuxVins.csproj", "{11799EC4-75E9-48EC-9782-047FE4BF6F94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntreDeuxVinsModel", "AntreDeuxVinsModel\AntreDeuxVinsModel.csproj", "{A73577F2-5E59-4792-ABBF-810CA937C66E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11799EC4-75E9-48EC-9782-047FE4BF6F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11799EC4-75E9-48EC-9782-047FE4BF6F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11799EC4-75E9-48EC-9782-047FE4BF6F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11799EC4-75E9-48EC-9782-047FE4BF6F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A73577F2-5E59-4792-ABBF-810CA937C66E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A73577F2-5E59-4792-ABBF-810CA937C66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A73577F2-5E59-4792-ABBF-810CA937C66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A73577F2-5E59-4792-ABBF-810CA937C66E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4BDA1F31-EB5E-4E39-AB1A-463A5C6F38BF}
+	EndGlobalSection
+EndGlobal
