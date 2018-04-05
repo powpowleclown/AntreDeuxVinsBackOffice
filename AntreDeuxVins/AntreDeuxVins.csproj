@@ -5,11 +5,42 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <Compile Remove="Areas\API\Data\**" />
+    <Compile Remove="Areas\API\Models\**" />
+    <Compile Remove="Areas\API\Views\**" />
+    <Content Remove="Areas\API\Data\**" />
+    <Content Remove="Areas\API\Models\**" />
+    <Content Remove="Areas\API\Views\**" />
+    <EmbeddedResource Remove="Areas\API\Data\**" />
+    <EmbeddedResource Remove="Areas\API\Models\**" />
+    <EmbeddedResource Remove="Areas\API\Views\**" />
+    <None Remove="Areas\API\Data\**" />
+    <None Remove="Areas\API\Models\**" />
+    <None Remove="Areas\API\Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AntreDeuxVinsModel\AntreDeuxVinsModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\BackOffice\Models\" />
+    <Folder Include="Areas\BackOffice\Data\" />
   </ItemGroup>
 
 </Project>

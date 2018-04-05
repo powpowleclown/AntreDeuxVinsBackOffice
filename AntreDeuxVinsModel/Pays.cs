@@ -9,5 +9,9 @@ namespace AntreDeuxVinsModel
         public int Id { get; set; }
         public String Nom { get; set; }
         public ICollection<Region> Regions { get; set; }
+        public Pays()
+        {
+
+        }
     }
 }

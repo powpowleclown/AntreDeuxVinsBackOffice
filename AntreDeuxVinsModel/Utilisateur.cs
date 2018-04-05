@@ -12,5 +12,9 @@ namespace AntreDeuxVinsModel
         public String Mail { get; set; }
         public String Password { get; set; }
         public Role Role { get; set; }
+        public Utilisateur()
+        {
+
+        }
     }
 }

@@ -8,5 +8,10 @@ namespace AntreDeuxVinsModel
     {
         public int Id { get; set; }
         public String Nom { get; set; }
+        public ICollection<Vin> Vins { get; set; }
+        public Couleur()
+        {
+
+        }
     }
 }

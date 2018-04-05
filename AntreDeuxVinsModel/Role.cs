@@ -8,5 +8,11 @@ namespace AntreDeuxVinsModel
     {
         public int Id { get; set; }
         public String Nom { get; set; }
+        public ICollection<Utilisateur> Utilisateurs { get; set; }
+        public Role()
+        {
+
+        }
+
     }
 }

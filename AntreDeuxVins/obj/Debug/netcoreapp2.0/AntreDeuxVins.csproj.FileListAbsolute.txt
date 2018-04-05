@@ -6,3 +6,8 @@ C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.csproj.CoreCompileInputs.cache
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.AssemblyInfoInputs.cache
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.AssemblyInfo.cs
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\bin\Debug\netcoreapp2.0\AntreDeuxVins.pdb
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\bin\Debug\netcoreapp2.0\AntreDeuxVinsModel.dll
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\bin\Debug\netcoreapp2.0\AntreDeuxVinsModel.pdb
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.dll
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVins\obj\Debug\netcoreapp2.0\AntreDeuxVins.pdb

@@ -15,7 +15,11 @@ namespace AntreDeuxVinsModel
         public Couleur Couleur { get; set; }
         public Pays Pays { get; set; }
         public Region Region { get; set; }
-        public ICollection<Cave> Caves { get; set; }
-        public ICollection<Aliment> Aliments { get; set; }
+        public ICollection<CaveVin> VinCaves { get; set; }
+        public ICollection<VinAliment> VinAliments { get; set; }
+        public Vin()
+        {
+
+        }
     }
 }

@@ -9,5 +9,11 @@ namespace AntreDeuxVinsModel
         public int Id { get; set; }
         public String Nom { get; set; }
         public String Description { get; set; }
+        public ICollection<VinAliment> AlimentVins { get; set; }
+
+        public Aliment()
+        {
+
+        }
     }
 }

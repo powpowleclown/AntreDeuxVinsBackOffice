@@ -1,0 +1,9 @@
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\bin\Debug\netcoreapp2.0\AntreDeuxVinsModel.deps.json
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\bin\Debug\netcoreapp2.0\AntreDeuxVinsModel.dll
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\bin\Debug\netcoreapp2.0\AntreDeuxVinsModel.pdb
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\obj\Debug\netcoreapp2.0\AntreDeuxVinsModel.csprojResolveAssemblyReference.cache
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\obj\Debug\netcoreapp2.0\AntreDeuxVinsModel.csproj.CoreCompileInputs.cache
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\obj\Debug\netcoreapp2.0\AntreDeuxVinsModel.AssemblyInfoInputs.cache
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\obj\Debug\netcoreapp2.0\AntreDeuxVinsModel.AssemblyInfo.cs
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\obj\Debug\netcoreapp2.0\AntreDeuxVinsModel.dll
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsModel\obj\Debug\netcoreapp2.0\AntreDeuxVinsModel.pdb
