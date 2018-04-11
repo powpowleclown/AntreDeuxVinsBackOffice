@@ -13,13 +13,7 @@ namespace AntreDeuxVins.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            ((Controller)context.Controller).TempData["REDIRECT_BO"] =
-                context.HttpContext.Request.Path.Value;
-            //base.OnActionExecuting(context);
-            if (string.IsNullOrWhiteSpace(context.HttpContext.Session.GetString("USER_BO")))
-            {
-                //context.Result = new RedirectToActionResult("Login", "AuthenticationBackoffice", new { area = "Backoffice" });
-            }
+            //((Controller)context.Controller).TempData["REDIRECT"] = context.HttpContext.Request.Path.Value;
         }
     }
 }

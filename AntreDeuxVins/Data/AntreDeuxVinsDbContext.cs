@@ -1,42 +1,33 @@
 ﻿using AntreDeuxVins.Providers;
 using AntreDeuxVinsModel;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace AntreDeuxVins.Data
 {
-    public class AntreDeuxVinsDbContext : DbContext
+    public class AntreDeuxVinsDbContext : IdentityDbContext<Utilisateur,Role, Guid>
     {
         public DbSet<Aliment> Aliments { get; set; }
         public DbSet<Cave> Caves { get; set; }
-        public DbSet<CaveVin> CaveVins { get; set; }
         public DbSet<Couleur> Couleurs { get; set; }
         public DbSet<Pays> Pays { get; set; }
         public DbSet<Region> Regions { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<Role> Role { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<Vin> Vins { get; set; }
         public DbSet<VinAliment> VinAlments { get; set; }
 
-    public AntreDeuxVinsDbContext(DbContextOptions<AntreDeuxVinsDbContext> options) : base(options)
+        public AntreDeuxVinsDbContext(DbContextOptions<AntreDeuxVinsDbContext> options) : base(options)
         {
 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            //modelBuilder.Entity<Cave>().HasIndex(x => x.Id).IsUnique();
-            modelBuilder.Entity<CaveVin>()
-                .HasKey(cv => new { cv.CaveId, cv.VinId });
-            modelBuilder.Entity<CaveVin>()
-                .HasOne(cv => cv.Cave)
-                .WithMany(c => c.CaveVins)
-                .HasForeignKey(cv => cv.CaveId);
-            modelBuilder.Entity<CaveVin>()
-                .HasOne(cv => cv.Vin)
-                .WithMany(v => v.VinCaves)
-                .HasForeignKey(cv => cv.VinId);
+            base.OnModelCreating(modelBuilder);            
             modelBuilder.Entity<VinAliment>()
                .HasKey(va => new { va.VinId, va.AlimentId});
             modelBuilder.Entity<VinAliment>()
@@ -46,16 +37,24 @@ namespace AntreDeuxVins.Data
             modelBuilder.Entity<VinAliment>()
                 .HasOne(va => va.Aliment)
                 .WithMany(a => a.AlimentVins)
-                .HasForeignKey(va => va.AlimentId);
+                .HasForeignKey(va => va.AlimentId)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Couleur>()
                 .HasMany(c => c.Vins)
-                .WithOne(v => v.Couleur);
+                .WithOne(v => v.Couleur)
+                .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Cave>()
+                .HasMany(c => c.Vins)
+                .WithOne(v => v.Cave)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Pays>()
                 .HasMany(p => p.Regions)
-                .WithOne(r => r.Pays);
+                .WithOne(r => r.Pays)
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Region>()
                 .HasOne(r => r.Pays)
-                .WithMany(p => p.Regions);
+                .WithMany(p => p.Regions)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Role>()
                 .HasMany(r => r.Utilisateurs)
                 .WithOne(u => u.Role);
@@ -71,6 +70,7 @@ namespace AntreDeuxVins.Data
             fact.AddProvider(new SQLLoggerProvider());
             optionsBuilder.UseLoggerFactory(fact);
         }
+
 
     }
 }

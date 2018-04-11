@@ -1,0 +1,34 @@
+﻿@model AntreDeuxVinsModel.Region
+
+@{
+    ViewData["Title"] = Localizer["Create"]+"-"+Localizer["Regions"];
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["Regions"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateByPays">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PaysId" value="@ViewBag.PaysId" />
+            <div class="form-group">
+                <label asp-for="Nom" class="control-label"></label>
+                <input asp-for="Nom" class="form-control" />
+                <span asp-validation-for="Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Create"]" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Details" asp-controller="Pays" asp-route-id="@ViewBag.PaysId" asp-area="BackOffice">@Localizer["Back"]</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

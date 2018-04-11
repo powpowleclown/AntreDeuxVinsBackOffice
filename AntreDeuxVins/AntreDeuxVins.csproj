@@ -21,13 +21,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.9" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,12 +38,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AntreDeuxVinsLanguages\AntreDeuxVinsLanguages.csproj" />
     <ProjectReference Include="..\AntreDeuxVinsModel\AntreDeuxVinsModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\BackOffice\Models\" />
     <Folder Include="Areas\BackOffice\Data\" />
+    <Folder Include="Areas\BackOffice\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\ResourceView.Designer.cs">
+      <DependentUpon>ResourceView.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ResourceView.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ResourceView.resx">
+      <LastGenOutput>ResourceView.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

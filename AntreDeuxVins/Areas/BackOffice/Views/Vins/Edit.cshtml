@@ -1,17 +1,18 @@
 ﻿@model AntreDeuxVinsModel.Vin
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = Localizer["Edit"]+"-"+ Localizer["Vins"];
 }
 
-<h2>Edit</h2>
+<h2>@Localizer["Edit"]</h2>
 
-<h4>Vin</h4>
+<h4>@Localizer["Vins"]</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="Parent" value="@ViewBag.Parent" />
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Nom" class="control-label"></label>
@@ -30,12 +31,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Millesime" class="control-label"></label>
-                <input asp-for="Millesime" class="form-control" />
+                <input type="date" asp-for="Millesime" class="form-control" />
                 <span asp-validation-for="Millesime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Volume" class="control-label"></label>
-                <input asp-for="Volume" class="form-control" />
+                <input type="number" asp-for="Volume" class="form-control" />
                 <span asp-validation-for="Volume" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,16 +45,76 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label asp-for="Couleur" class="control-label"></label>
+                <select asp-for="CouleurId" asp-items="ViewBag.Couleurs" class="form-control">
+                    <option>Select</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pays" class="control-label"></label>
+                <select asp-for="PaysId" asp-items="ViewBag.Pays" class="form-control">
+                    <option>Select</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Region" class="control-label"></label>
+                <select asp-for="RegionId" asp-items="ViewBag.Regions" class="form-control">
+                    <option>Select</option>
+                </select>
+            </div>
+            @if (@ViewBag.Parent != null)
+            {
+                <label asp-for="Cave" class="control-label"></label>
+                <input asp-for="CaveId" class="form-control" disabled="disabled"/>
+                <span asp-validation-for="CaveId" class="text-danger"></span>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="Cave" class="control-label"></label>
+                    <select asp-for="CaveId" asp-items="ViewBag.Caves" class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                    <span asp-validation-for="CaveId" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="VinAliments" class="control-label"></label>
+                <select class="form-control" name="AlimentsId" multiple>
+                    <option value="">Select</option>
+                    @foreach (var item in ViewBag.Aliments)
+                    {
+                        @if (ViewBag.VinAliments != null && ((List<int>)ViewBag.VinAliments).Any(s => s == int.Parse(item.Value)))
+                        {
+                            <option value="@item.Value" selected>@item.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantite" class="control-label"></label>
+                <input type="number" asp-for="Quantite" class="form-control" />
+                <span asp-validation-for="Quantite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @if (@ViewBag.Parent == null)
+    {
+        <a asp-action="Index">@Localizer["Back"]</a>
+    }
+    else
+    {
+        <a asp-action="Details" asp-controller="Caves" asp-route-id="@ViewBag.Parent" asp-area="BackOffice">@Localizer["Back"]</a>
+    }
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AntreDeuxVins.Data;
 using AntreDeuxVinsModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
     public class PaysController : Controller
     {
@@ -34,8 +36,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 return NotFound();
             }
 
-            var pays = await _context.Pays
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var pays = await _context.Pays.Include(p => p.Regions).SingleOrDefaultAsync(m => m.Id == id);
             if (pays == null)
             {
                 return NotFound();
@@ -55,7 +56,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom")] Pays pays)
+        public async Task<IActionResult> Create([Bind("Nom")] Pays pays)
         {
             if (ModelState.IsValid)
             {

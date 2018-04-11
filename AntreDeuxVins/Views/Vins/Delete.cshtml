@@ -1,0 +1,75 @@
+﻿@model AntreDeuxVinsModel.Vin
+
+@{
+    ViewData["Title"] = Localizer["Delete"]+"-"+ Localizer["Vin"];
+}
+
+<h2>@Localizer["Delete"]</h2>
+
+<h3>@Localizer["DeleteMsg"]</h3>
+<div>
+    <h4>Vin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Millesime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Millesime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Volume)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Volume)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Couleur)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Couleur.Nom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pays)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pays.Nom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Region.Nom)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="@Localizer["Delete"]" class="btn btn-default" /> |
+        <a asp-action="Details" asp-controller="Caves">@Localizer["Back"]</a>
+    </form>
+</div>

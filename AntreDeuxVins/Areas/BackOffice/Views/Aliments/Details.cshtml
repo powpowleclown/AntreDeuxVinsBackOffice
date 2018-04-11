@@ -1,13 +1,13 @@
 ﻿@model AntreDeuxVinsModel.Aliment
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Localizer["Details"]+"-"+Localizer["Aliments"];
 }
 
-<h2>Details</h2>
+<h2>@Localizer["Details"]</h2>
 
 <div>
-    <h4>Aliment</h4>
+    <h4>@Localizer["Aliments"]</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -25,6 +25,13 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" asp-route-Parent="@ViewBag.Parent">@Localizer["Edit"]</a> |
+    @if (@ViewBag.Parent == null)
+    {
+        <a asp-action="Index">@Localizer["Back"]</a>
+    }
+    else
+    {
+        <a asp-action="Details" asp-controller="Vins" asp-route-id="@ViewBag.Parent" asp-route-Parent="@ViewBag.ParentParent" asp-area="BackOffice">@Localizer["Back"]</a>
+    }
 </div>

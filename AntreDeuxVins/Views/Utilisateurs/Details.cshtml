@@ -1,0 +1,36 @@
+﻿@model AntreDeuxVinsModel.Utilisateur
+
+@{
+    ViewData["Title"] = Localizer["Details"];
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["Utilisateur"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Prenom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Prenom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">@Localizer["Edit"]</a> |
+    <a asp-action="EditPwd" asp-route-id="@Model.Id">@Localizer["EditPwd"]</a>
+</div>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<AntreDeuxVinsModel.Vin>
+@{
+    ViewData["Title"] = Localizer["CaveVins"];
+}
+
+<h4>@Localizer["Vins"]</h4>
+
+<p>
+    <a asp-area="BackOffice" asp-controller="Vins" asp-action="CreateByCave" asp-route-CaveId="@ViewData["CaveId"]">@Localizer["CreateNew"]</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Millesime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Couleur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantite)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Millesime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Couleur.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pays.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantite)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Vins" asp-area="BackOffice" asp-route-id="@item.Id" asp-route-Parent="@ViewData["CaveId"]">@Localizer["Edit"]</a> |
+                <a asp-action="Details" asp-controller="Vins" asp-area="BackOffice" asp-route-id="@item.Id" asp-route-Parent="@ViewData["CaveId"]">@Localizer["Details"]</a> |
+                <a asp-action="Delete" asp-controller="Vins" asp-area="BackOffice" asp-route-id="@item.Id" asp-route-Parent="@ViewData["CaveId"]">@Localizer["Delete"]</a>
+            </td>
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <p>No Data</p>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

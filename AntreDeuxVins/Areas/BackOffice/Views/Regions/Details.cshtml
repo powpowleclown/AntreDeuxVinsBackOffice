@@ -1,13 +1,13 @@
 ﻿@model AntreDeuxVinsModel.Region
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Localizer["Details"]+"-"+ Localizer["Regions"];
 }
 
-<h2>Details</h2>
+<h2>@Localizer["Details"]</h2>
 
 <div>
-    <h4>Region</h4>
+    <h4>@Localizer["Regions"]</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,9 +16,22 @@
         <dd>
             @Html.DisplayFor(model => model.Nom)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pays)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pays.Nom)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" asp-route-Parent="@ViewBag.Parent">@Localizer["Edit"]</a> |
+    @if (@ViewBag.Parent == null)
+    {
+        <a asp-action="Index">@Localizer["Back"]</a>
+    }
+    else
+    {
+        <a asp-action="Details" asp-controller="Pays" asp-route-id="@ViewBag.Parent" asp-area="BackOffice">@Localizer["Back"]</a>
+    }
 </div>

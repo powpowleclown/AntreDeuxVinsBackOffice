@@ -1,13 +1,13 @@
 ﻿@model AntreDeuxVinsModel.Pays
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Localizer["Details"]+"-"+Localizer["PaysP"];
 }
 
-<h2>Details</h2>
+<h2>@Localizer["Details"]</h2>
 
 <div>
-    <h4>Pays</h4>
+    <h4>@Localizer["PaysP"]</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,6 +19,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">@Localizer["Edit"]</a> |
+    <a asp-action="Index">@Localizer["Back"]</a>
 </div>
+@await Html.PartialAsync("/Areas/BackOffice/Views/Pays/PaysRegions.cshtml", Model.Regions, new ViewDataDictionary(this.ViewData) { { "PaysId", @Model.Id } })
+

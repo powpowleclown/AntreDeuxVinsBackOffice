@@ -1,17 +1,19 @@
 ﻿@model AntreDeuxVinsModel.Aliment
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = Localizer["Edit"]+"-"+Localizer["Aliments"];
 }
 
-<h2>Edit</h2>
+<h2>@Localizer["Edit"]</h2>
 
-<h4>Aliment</h4>
+<h4>@Localizer["Aliments"]</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="Parent" value="@ViewBag.Parent" />
+            <input type="hidden" name="ParentParent" value="@ViewBag.ParentParent" />
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Nom" class="control-label"></label>
@@ -24,14 +26,21 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @if (@ViewBag.Parent == null)
+    {
+        <a asp-action="Index">@Localizer["Back"]</a>
+    }
+    else
+    {
+        <a asp-action="Details" asp-controller="Vins" asp-route-id="@ViewBag.Parent" asp-route-Parent="@ViewBag.ParentParent" asp-area="BackOffice">@Localizer["Back"]</a>
+    }
 </div>
 
 @section Scripts {

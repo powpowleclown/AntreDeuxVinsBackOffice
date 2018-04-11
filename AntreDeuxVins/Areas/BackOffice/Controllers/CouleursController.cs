@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AntreDeuxVins.Data;
 using AntreDeuxVinsModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
     public class CouleursController : Controller
     {
@@ -55,7 +57,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom")] Couleur couleur)
+        public async Task<IActionResult> Create([Bind("Nom")] Couleur couleur)
         {
             if (ModelState.IsValid)
             {

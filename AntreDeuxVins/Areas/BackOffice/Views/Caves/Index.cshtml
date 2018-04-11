@@ -1,23 +1,26 @@
 ﻿@model IEnumerable<AntreDeuxVinsModel.Cave>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = Localizer["Index"]+"-"+Localizer["Caves"];
 }
 
-<h2>Index</h2>
+<h2>@Localizer["Index"]</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@Localizer["CreateNew"]</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nom)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Utilisateur.Email)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -31,9 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Utilisateur.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">@Localizer["Details"]</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
             </td>
         </tr>
 }

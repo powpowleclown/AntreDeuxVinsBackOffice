@@ -7,35 +7,41 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AntreDeuxVins.Data;
 using AntreDeuxVinsModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
     public class RolesController : Controller
     {
         private readonly AntreDeuxVinsDbContext _context;
+        private readonly RoleManager<Role> _roleManager;
 
-        public RolesController(AntreDeuxVinsDbContext context)
+
+        public RolesController(AntreDeuxVinsDbContext context, RoleManager<Role> roleManager)
         {
             _context = context;
+            _roleManager = roleManager;
+
         }
 
         // GET: BackOffice/Roles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Roles.ToListAsync());
+            return View(await _roleManager.Roles.ToListAsync());
         }
 
         // GET: BackOffice/Roles/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var role = await _context.Roles
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var role = await _roleManager.FindByIdAsync(id.ToString());
             if (role == null)
             {
                 return NotFound();
@@ -55,26 +61,25 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom")] Role role)
+        public async Task<IActionResult> Create([Bind("Name")] Role role)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(role);
-                await _context.SaveChangesAsync();
+                await _roleManager.CreateAsync(new Role(role.Name));
                 return RedirectToAction(nameof(Index));
             }
             return View(role);
         }
 
         // GET: BackOffice/Roles/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var role = await _context.Roles.SingleOrDefaultAsync(m => m.Id == id);
+            var role = await _roleManager.FindByIdAsync(id.ToString()); ;
             if (role == null)
             {
                 return NotFound();
@@ -87,7 +92,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom")] Role role)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name")] Role role)
         {
             if (id != role.Id)
             {
@@ -98,8 +103,9 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 try
                 {
-                    _context.Update(role);
-                    await _context.SaveChangesAsync();
+                    var updaterole = _roleManager.Roles.First(r => r.Id == id);
+                    updaterole.Name = role.Name;
+                    await _roleManager.UpdateAsync(updaterole);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,15 +124,14 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         }
 
         // GET: BackOffice/Roles/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var role = await _context.Roles
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var role = await _roleManager.FindByIdAsync(id.ToString());
             if (role == null)
             {
                 return NotFound();
@@ -138,17 +143,16 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // POST: BackOffice/Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var role = await _context.Roles.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Roles.Remove(role);
-            await _context.SaveChangesAsync();
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            await _roleManager.DeleteAsync(role);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RoleExists(int id)
+        private bool RoleExists(Guid id)
         {
-            return _context.Roles.Any(e => e.Id == id);
+            return _context.Role.Any(e => e.Id == id);
         }
     }
 }

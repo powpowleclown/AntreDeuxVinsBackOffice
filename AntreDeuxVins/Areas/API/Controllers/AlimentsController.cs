@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AntreDeuxVins.Data;
 using AntreDeuxVinsModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace AntreDeuxVins.Areas.API.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     [Produces("application/json")]
     [Route("api/Aliments")]
     public class AlimentsController : Controller
@@ -22,6 +25,7 @@ namespace AntreDeuxVins.Areas.API.Controllers
         }
 
         // GET: api/Aliments
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         [HttpGet]
         public IEnumerable<Aliment> GetAliments()
         {

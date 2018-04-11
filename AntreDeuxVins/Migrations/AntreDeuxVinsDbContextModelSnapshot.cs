@@ -27,7 +27,8 @@ namespace AntreDeuxVins.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("Nom")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -41,9 +42,10 @@ namespace AntreDeuxVins.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("Nom")
+                        .IsRequired();
 
-                    b.Property<int?>("UtilisateurId");
+                    b.Property<Guid>("UtilisateurId");
 
                     b.HasKey("Id");
 
@@ -52,27 +54,13 @@ namespace AntreDeuxVins.Migrations
                     b.ToTable("Caves");
                 });
 
-            modelBuilder.Entity("AntreDeuxVinsModel.CaveVin", b =>
-                {
-                    b.Property<int>("CaveId");
-
-                    b.Property<int>("VinId");
-
-                    b.Property<int>("Quantite");
-
-                    b.HasKey("CaveId", "VinId");
-
-                    b.HasIndex("VinId");
-
-                    b.ToTable("CaveVins");
-                });
-
             modelBuilder.Entity("AntreDeuxVinsModel.Couleur", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("Nom")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -84,7 +72,8 @@ namespace AntreDeuxVins.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("Nom")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -96,9 +85,10 @@ namespace AntreDeuxVins.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("Nom")
+                        .IsRequired();
 
-                    b.Property<int?>("PaysId");
+                    b.Property<int>("PaysId");
 
                     b.HasKey("Id");
 
@@ -109,42 +99,95 @@ namespace AntreDeuxVins.Migrations
 
             modelBuilder.Entity("AntreDeuxVinsModel.Role", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("AntreDeuxVinsModel.Utilisateur", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Mail");
+                    b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
 
-                    b.Property<string>("Prenom");
+                    b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int?>("RoleId");
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Nom")
+                        .IsRequired();
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired();
+
+                    b.Property<Guid?>("RoleId");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Utilisateurs");
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("AntreDeuxVinsModel.Vin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CaveId");
 
                     b.Property<int?>("CouleurId");
 
@@ -154,9 +197,12 @@ namespace AntreDeuxVins.Migrations
 
                     b.Property<DateTime>("Millesime");
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("Nom")
+                        .IsRequired();
 
                     b.Property<int?>("PaysId");
+
+                    b.Property<int>("Quantite");
 
                     b.Property<int?>("RegionId");
 
@@ -165,6 +211,8 @@ namespace AntreDeuxVins.Migrations
                     b.Property<int>("Volume");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CaveId");
 
                     b.HasIndex("CouleurId");
 
@@ -185,26 +233,95 @@ namespace AntreDeuxVins.Migrations
 
                     b.HasIndex("AlimentId");
 
-                    b.ToTable("VinAliment");
+                    b.ToTable("VinAlments");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<Guid>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("ProviderKey");
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId");
+
+                    b.Property<Guid>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId");
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("AntreDeuxVinsModel.Cave", b =>
                 {
                     b.HasOne("AntreDeuxVinsModel.Utilisateur", "Utilisateur")
                         .WithMany()
-                        .HasForeignKey("UtilisateurId");
-                });
-
-            modelBuilder.Entity("AntreDeuxVinsModel.CaveVin", b =>
-                {
-                    b.HasOne("AntreDeuxVinsModel.Cave", "Cave")
-                        .WithMany("CaveVins")
-                        .HasForeignKey("CaveId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AntreDeuxVinsModel.Vin", "Vin")
-                        .WithMany("VinCaves")
-                        .HasForeignKey("VinId")
+                        .HasForeignKey("UtilisateurId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -212,7 +329,8 @@ namespace AntreDeuxVins.Migrations
                 {
                     b.HasOne("AntreDeuxVinsModel.Pays", "Pays")
                         .WithMany("Regions")
-                        .HasForeignKey("PaysId");
+                        .HasForeignKey("PaysId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AntreDeuxVinsModel.Utilisateur", b =>
@@ -224,9 +342,15 @@ namespace AntreDeuxVins.Migrations
 
             modelBuilder.Entity("AntreDeuxVinsModel.Vin", b =>
                 {
+                    b.HasOne("AntreDeuxVinsModel.Cave", "Cave")
+                        .WithMany("Vins")
+                        .HasForeignKey("CaveId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("AntreDeuxVinsModel.Couleur", "Couleur")
                         .WithMany("Vins")
-                        .HasForeignKey("CouleurId");
+                        .HasForeignKey("CouleurId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("AntreDeuxVinsModel.Pays", "Pays")
                         .WithMany()
@@ -247,6 +371,51 @@ namespace AntreDeuxVins.Migrations
                     b.HasOne("AntreDeuxVinsModel.Vin", "Vin")
                         .WithMany("VinAliments")
                         .HasForeignKey("VinId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.HasOne("AntreDeuxVinsModel.Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.HasOne("AntreDeuxVinsModel.Utilisateur")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.HasOne("AntreDeuxVinsModel.Utilisateur")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.HasOne("AntreDeuxVinsModel.Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AntreDeuxVinsModel.Utilisateur")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.HasOne("AntreDeuxVinsModel.Utilisateur")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AntreDeuxVins.Data;
 using AntreDeuxVinsModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
     public class CavesController : Controller
     {
@@ -23,7 +26,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // GET: BackOffice/Caves
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Caves.ToListAsync());
+            return View(await _context.Caves.Include(c => c.Utilisateur).ToListAsync());
         }
 
         // GET: BackOffice/Caves/Details/5
@@ -33,9 +36,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
-
-            var cave = await _context.Caves
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var cave = await _context.Caves.Include(c => c.Utilisateur).Include(c => c.Vins).ThenInclude(v => v.Couleur).Include(c => c.Vins).ThenInclude(v => v.Pays).Include(c => c.Vins).ThenInclude(v => v.Region).SingleOrDefaultAsync(c => c.Id == id);
             if (cave == null)
             {
                 return NotFound();
@@ -45,8 +46,9 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         }
 
         // GET: BackOffice/Caves/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Utilisateurs = new SelectList(await _context.Utilisateurs.ToListAsync(), "Id", "UserName");
             return View();
         }
 
@@ -55,14 +57,16 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Description")] Cave cave)
+        public async Task<IActionResult> Create([Bind("Nom,Description,UtilisateurId")] Cave cave)
         {
+            //USER
             if (ModelState.IsValid)
             {
                 _context.Add(cave);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Utilisateurs = new SelectList(await _context.Utilisateurs.ToListAsync(), "Id", "UserName");
             return View(cave);
         }
 
@@ -79,6 +83,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Utilisateurs = new SelectList(await _context.Utilisateurs.ToListAsync(), "Id", "UserName");
             return View(cave);
         }
 
@@ -87,7 +92,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Description")] Cave cave)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Description,UtilisateurId")] Cave cave)
         {
             if (id != cave.Id)
             {
@@ -114,6 +119,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Utilisateurs = new SelectList(await _context.Utilisateurs.ToListAsync(), "Id", "UserName");
             return View(cave);
         }
 
@@ -125,8 +131,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 return NotFound();
             }
 
-            var cave = await _context.Caves
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var cave = await _context.Caves.Include(c => c.Utilisateur).SingleOrDefaultAsync(m => m.Id == id);
             if (cave == null)
             {
                 return NotFound();

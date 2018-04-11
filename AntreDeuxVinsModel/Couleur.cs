@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace AntreDeuxVinsModel
@@ -7,7 +8,10 @@ namespace AntreDeuxVinsModel
     public class Couleur
     {
         public int Id { get; set; }
-        public String Nom { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AntreDeuxVinsLanguages.Resources.ErrorMessageResource))]
+        [Display(Name = "Nom", ResourceType = typeof(AntreDeuxVins.Resources.ResourceModelCouleur))]
+        public string Nom { get; set; }
+        [Display(Name = "Vins", ResourceType = typeof(AntreDeuxVins.Resources.ResourceModelCouleur))]
         public ICollection<Vin> Vins { get; set; }
         public Couleur()
         {

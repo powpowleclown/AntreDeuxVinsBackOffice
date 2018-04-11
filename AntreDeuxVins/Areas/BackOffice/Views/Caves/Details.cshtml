@@ -1,13 +1,13 @@
 ﻿@model AntreDeuxVinsModel.Cave
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Localizer["Details"]+"-"+Localizer["Caves"];
 }
 
-<h2>Details</h2>
+<h2>@Localizer["Details"]</h2>
 
 <div>
-    <h4>Cave</h4>
+    <h4>@Localizer["Caves"]</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -22,9 +22,17 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Utilisateur.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Utilisateur.Email)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">@Localizer["Edit"]</a> |
+    <a asp-action="Index">@Localizer["Back"]</a>
 </div>
+@await Html.PartialAsync("/Areas/BackOffice/Views/Caves/CaveVins.cshtml", Model.Vins, new ViewDataDictionary(this.ViewData) { { "CaveId", @Model.Id } })
+

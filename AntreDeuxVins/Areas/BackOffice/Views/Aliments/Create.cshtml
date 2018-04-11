@@ -1,12 +1,12 @@
 ﻿@model AntreDeuxVinsModel.Aliment
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = Localizer["Create"]+"-" +Localizer["Aliments"];
 }
 
-<h2>Create</h2>
+<h2>@Localizer["Create"]</h2>
 
-<h4>Aliment</h4>
+<h4>@Localizer["Aliments"]</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,14 +23,14 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="@Localizer["Create"]" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localizer["Back"]</a>
 </div>
 
 @section Scripts {

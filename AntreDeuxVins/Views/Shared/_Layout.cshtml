@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using AntreDeuxVinsModel
+@inject SignInManager<Utilisateur> SignInManager
+@inject UserManager<Utilisateur> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,9 +35,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-action="Index" asp-controller="Home" asp-area="BackOffice">BackOffice</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-action="Details" asp-controller="Utilisateurs" asp-area="">@UserManager.GetUserName(User)</a></li>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-action="Index" asp-controller="Home" asp-area="BackOffice">@Localizer["BackOffice"]</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Caves" asp-action="Details">@Localizer["MaCave"]</a></li>
+                        }
+                        <li><a asp-area="" asp-controller="Home" asp-action="LogOut">@Localizer["LogOut"]</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="SignUp">@Localizer["SignUp"]</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="SignIn">@Localizer["SignIn"]</a></li>
+                    }
                 </ul>
             </div>
         </div>

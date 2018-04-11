@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AntreDeuxVinsModel.Region>
+@{
+    ViewData["Title"] = @Localizer["PaysRegions"];
+}
+
+<h4>@Localizer["Regions"]</h4>
+
+<p>
+    <a asp-area="BackOffice" asp-controller="Regions" asp-action="CreateByPays" asp-route-PaysId="@ViewData["PaysId"]">@Localizer["CreateNew"]</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Regions" asp-area="BackOffice" asp-route-id="@item.Id" asp-route-Parent="@ViewData["PaysId"]">@Localizer["Edit"]</a> |
+                <a asp-action="Details" asp-controller="Regions" asp-area="BackOffice" asp-route-id="@item.Id" asp-route-Parent="@ViewData["PaysId"]">@Localizer["Details"]</a> |
+                <a asp-action="Delete" asp-controller="Regions" asp-area="BackOffice" asp-route-id="@item.Id" asp-route-Parent="@ViewData["PaysId"]">@Localizer["Delete"]</a>
+            </td>
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <p>No Data</p>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
