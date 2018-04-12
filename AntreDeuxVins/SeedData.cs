@@ -19,6 +19,37 @@ namespace AntreDeuxVins
             var usermanager = serviceProvider.GetRequiredService<UserManager<Utilisateur>>();
             var rolemanager = serviceProvider.GetRequiredService<RoleManager<Role>>();
             context.Database.EnsureCreated();
+            //COULEUR
+            if (!context.Couleurs.Any())
+            {
+                var resultCouleursRouge = await context.Couleurs.AddAsync(new Couleur { Nom = "Rouge" });
+                var resultCouleursBlanc = await context.Couleurs.AddAsync(new Couleur { Nom = "Blanc" });
+                var resultCouleursRose = await context.Couleurs.AddAsync(new Couleur { Nom = "Rose" });
+            }
+            //PAYS
+            if (!context.Pays.Any())
+            {
+                var resultPaysFrance = await context.Pays.AddAsync(new Pays { Nom = "France" });
+                var resultPaysItalie = await context.Pays.AddAsync(new Pays { Nom = "Italie" });
+                //REGIONS
+                if (!context.Regions.Any())
+                {
+                    //FRANCE
+                    var resultRegionsFranceBordeaux = await context.Regions.AddAsync(new Region { Nom = "Bordeaux", PaysId = resultPaysFrance.Entity.Id });
+                    var resultRegionsFranceAix = await context.Regions.AddAsync(new Region { Nom = "Aix", PaysId = resultPaysFrance.Entity.Id });
+                    //ITALIE
+                    var resultRegionsItalieRome = await context.Regions.AddAsync(new Region { Nom = "Rome", PaysId = resultRegionsFranceAix.Entity.Id });
+                    var resultRegionsItalieVenise = await context.Regions.AddAsync(new Region { Nom = "Venise", PaysId = resultRegionsFranceAix.Entity.Id });
+                }
+            }
+            //ALIMENTS
+            if (!context.Aliments.Any())
+            {
+                var resultAlimentsViandeRouge = await context.Aliments.AddAsync(new Aliment { Nom = "Viande Rouge", Description = "Viande Rouge"});
+                var resultAlimentsViandeBlanche = await context.Aliments.AddAsync(new Aliment { Nom = "Viande Blanche", Description = "Viande Blanche" });
+                var resultAlimentsFromage = await context.Aliments.AddAsync(new Aliment { Nom = "Fromage", Description = "Fromage" });
+            }
+            //ROLE
             if (!context.Role.Any())
             {
                 var resultRoleAdmin = await rolemanager.CreateAsync(new Role("Admin"));
