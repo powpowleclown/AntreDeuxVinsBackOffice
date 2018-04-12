@@ -29,8 +29,10 @@ namespace AntreDeuxVinsModel
         [NotMapped]
         public string ConfirmPassword { get; set; }
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AntreDeuxVinsLanguages.Resources.ErrorMessageResource))]
-        public int RoleId { get; set; }
+        [NotMapped]
+        public Guid RoleId { get; set; }
         [Display(Name = "Role", ResourceType = typeof(AntreDeuxVinsLanguages.Resources.ResourceModelUtilisateur))]
+        [NotMapped]
         public Role Role { get; set; }
         public Utilisateur(string Mail, string Nom, string Prenom, string Password) : base(Mail)
         {

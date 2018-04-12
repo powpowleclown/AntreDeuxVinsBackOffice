@@ -25,6 +25,6 @@ C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netco
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\en\AntreDeuxVinsLanguages.resources.dll
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.dll
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.pdb
-C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.csprojResolveAssemblyReference.cache
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ErrorMessageResource.resources
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ErrorMessageResource.en.resources
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.csprojResolveAssemblyReference.cache

@@ -11,7 +11,7 @@ using System;
 namespace AntreDeuxVins.Migrations
 {
     [DbContext(typeof(AntreDeuxVinsDbContext))]
-    [Migration("20180410215722_Init")]
+    [Migration("20180412091801_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,55 @@ namespace AntreDeuxVins.Migrations
                     b.ToTable("Couleurs");
                 });
 
+            modelBuilder.Entity("AntreDeuxVinsModel.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+                });
+
+            modelBuilder.Entity("AntreDeuxVinsModel.LocalizableEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("EntityName");
+
+                    b.Property<string>("PrimaryKeyFieldName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LocalizableEntitys");
+                });
+
+            modelBuilder.Entity("AntreDeuxVinsModel.LocalizableEntityTranslation", b =>
+                {
+                    b.Property<int>("LocalizableEntityId");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<string>("FieldName");
+
+                    b.Property<int>("Id");
+
+                    b.Property<int>("PrimaryKeyValue");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("LocalizableEntityId", "LanguageId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("LocalizableEntityTranslations");
+                });
+
             modelBuilder.Entity("AntreDeuxVinsModel.Pays", b =>
                 {
                     b.Property<int>("Id")
@@ -107,6 +156,7 @@ namespace AntreDeuxVins.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
@@ -133,6 +183,7 @@ namespace AntreDeuxVins.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
@@ -141,8 +192,7 @@ namespace AntreDeuxVins.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<string>("Nom")
-                        .IsRequired();
+                    b.Property<string>("Nom");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -156,8 +206,7 @@ namespace AntreDeuxVins.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("Prenom")
-                        .IsRequired();
+                    b.Property<string>("Prenom");
 
                     b.Property<Guid?>("RoleId");
 
@@ -323,6 +372,19 @@ namespace AntreDeuxVins.Migrations
                     b.HasOne("AntreDeuxVinsModel.Utilisateur", "Utilisateur")
                         .WithMany()
                         .HasForeignKey("UtilisateurId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AntreDeuxVinsModel.LocalizableEntityTranslation", b =>
+                {
+                    b.HasOne("AntreDeuxVinsModel.Language", "Language")
+                        .WithMany("LocalizableEntityTranslations")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AntreDeuxVinsModel.LocalizableEntity", "LocalizableEntity")
+                        .WithMany("LocalizableEntityTranslations")
+                        .HasForeignKey("LocalizableEntityId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

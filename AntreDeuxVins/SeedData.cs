@@ -39,7 +39,7 @@ namespace AntreDeuxVins
                     }
                 }
                 //USER
-                var user = new Utilisateur("user@user.fr", "User", "User", "User123!");
+                var user = new Utilisateur("bernard.dupond@gmail.fr", "Dupond", "Bernard", "Dupond123!");
                 user.Role = rolemanager.Roles.SingleOrDefault(r => r.Name == "User");
                 var resultUser = await usermanager.CreateAsync(user);
                 if (resultUser.Succeeded)

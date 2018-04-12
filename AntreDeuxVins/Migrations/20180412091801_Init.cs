@@ -29,7 +29,7 @@ namespace AntreDeuxVins.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
+                    Name = table.Column<string>(maxLength: 256, nullable: false),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>
@@ -48,6 +48,34 @@ namespace AntreDeuxVins.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Couleurs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Languages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Code = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Languages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LocalizableEntitys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EntityName = table.Column<string>(nullable: true),
+                    PrimaryKeyFieldName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LocalizableEntitys", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,17 +119,17 @@ namespace AntreDeuxVins.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: false),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    Nom = table.Column<string>(nullable: false),
+                    Nom = table.Column<string>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    Prenom = table.Column<string>(nullable: false),
+                    Prenom = table.Column<string>(nullable: true),
                     RoleId = table.Column<Guid>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
@@ -116,6 +144,34 @@ namespace AntreDeuxVins.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LocalizableEntityTranslations",
+                columns: table => new
+                {
+                    LocalizableEntityId = table.Column<int>(nullable: false),
+                    LanguageId = table.Column<int>(nullable: false),
+                    FieldName = table.Column<string>(nullable: true),
+                    Id = table.Column<int>(nullable: false),
+                    PrimaryKeyValue = table.Column<int>(nullable: false),
+                    Text = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LocalizableEntityTranslations", x => new { x.LocalizableEntityId, x.LanguageId });
+                    table.ForeignKey(
+                        name: "FK_LocalizableEntityTranslations_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LocalizableEntityTranslations_LocalizableEntitys_LocalizableEntityId",
+                        column: x => x.LocalizableEntityId,
+                        principalTable: "LocalizableEntitys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -365,6 +421,11 @@ namespace AntreDeuxVins.Migrations
                 column: "UtilisateurId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LocalizableEntityTranslations_LanguageId",
+                table: "LocalizableEntityTranslations",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Regions_PaysId",
                 table: "Regions",
                 column: "PaysId");
@@ -413,7 +474,16 @@ namespace AntreDeuxVins.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "LocalizableEntityTranslations");
+
+            migrationBuilder.DropTable(
                 name: "VinAlments");
+
+            migrationBuilder.DropTable(
+                name: "Languages");
+
+            migrationBuilder.DropTable(
+                name: "LocalizableEntitys");
 
             migrationBuilder.DropTable(
                 name: "Aliments");

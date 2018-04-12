@@ -19,6 +19,10 @@ namespace AntreDeuxVins.Data
         public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<Vin> Vins { get; set; }
         public DbSet<VinAliment> VinAlments { get; set; }
+        //LOCALIZATION
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<LocalizableEntity> LocalizableEntitys { get; set; }
+        public DbSet<LocalizableEntityTranslation> LocalizableEntityTranslations { get; set; }
 
         public AntreDeuxVinsDbContext(DbContextOptions<AntreDeuxVinsDbContext> options) : base(options)
         {
@@ -55,12 +59,21 @@ namespace AntreDeuxVins.Data
                 .HasOne(r => r.Pays)
                 .WithMany(p => p.Regions)
                 .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Role>()
-                .HasMany(r => r.Utilisateurs)
-                .WithOne(u => u.Role);
             modelBuilder.Entity<Utilisateur>()
                 .HasOne(u => u.Role)
                 .WithMany(r => r.Utilisateurs);
+            modelBuilder.Entity<LocalizableEntityTranslation>()
+                .HasKey(l => new { l.LocalizableEntityId, l.LanguageId });
+            modelBuilder.Entity<LocalizableEntityTranslation>()
+                .HasOne(l => l.LocalizableEntity)
+                .WithMany(l => l.LocalizableEntityTranslations)
+                .HasForeignKey(va => va.LocalizableEntityId);
+            modelBuilder.Entity<LocalizableEntityTranslation>()
+                .HasOne(l => l.Language)
+                .WithMany(l => l.LocalizableEntityTranslations)
+                .HasForeignKey(va => va.LanguageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
