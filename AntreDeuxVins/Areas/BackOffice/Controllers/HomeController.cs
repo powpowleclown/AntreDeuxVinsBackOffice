@@ -30,6 +30,8 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             ViewBag.RolesSize = _context.Roles.Count();
             ViewBag.UtilisateursSize = _context.Utilisateurs.Count();
             ViewBag.VinsSize = _context.Vins.Count();
+            ViewBag.LanguagesSize = _context.Languages.Count();
+            ViewBag.EntitysSize = _context.LocalizableEntitys.Count();
             return View();
         }
     }

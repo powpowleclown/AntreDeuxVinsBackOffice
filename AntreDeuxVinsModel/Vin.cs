@@ -21,17 +21,20 @@ namespace AntreDeuxVinsModel
         public DateTime Millesime { get; set; }
         [Display(Name = "Volume", ResourceType = typeof(AntreDeuxVinsLanguages.Resources.ResourceModelVin))]
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AntreDeuxVinsLanguages.Resources.ErrorMessageResource))]
-        [DisplayFormat(DataFormatString = "{0} L", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0} L", ApplyFormatInEditMode = false)]
         [Range(0.094, 150, ErrorMessageResourceName ="ErrorVolume", ErrorMessageResourceType = typeof(AntreDeuxVinsLanguages.Resources.ErrorMessageResource))]
         public int Volume { get; set; }
         [Display(Name = "Image", ResourceType = typeof(AntreDeuxVinsLanguages.Resources.ResourceModelVin))]
         public string Image { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AntreDeuxVinsLanguages.Resources.ErrorMessageResource))]
         public int? CouleurId { get; set; }
         [Display(Name = "Couleur", ResourceType = typeof(AntreDeuxVinsLanguages.Resources.ResourceModelVin))]
         public Couleur Couleur { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AntreDeuxVinsLanguages.Resources.ErrorMessageResource))]
         public int? PaysId { get; set; }
         [Display(Name = "Pays", ResourceType = typeof(AntreDeuxVinsLanguages.Resources.ResourceModelVin))]
         public Pays Pays { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AntreDeuxVinsLanguages.Resources.ErrorMessageResource))]
         public int? RegionId { get; set; }
         [Display(Name = "Region", ResourceType = typeof(AntreDeuxVinsLanguages.Resources.ResourceModelVin))]
         public Region Region { get; set; }

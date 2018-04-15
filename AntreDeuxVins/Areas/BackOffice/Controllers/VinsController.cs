@@ -105,7 +105,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateByCave([Bind("Nom,Description,Type,Millesime,Volume,Image,CouleurId,PaysId,RegionId,CaveId")] Vin vin, int[] AlimentsId)
+        public async Task<IActionResult> CreateByCave([Bind("Nom,Description,Type,Millesime,Volume,Image,CouleurId,PaysId,RegionId,CaveId,Quantite")] Vin vin, int[] AlimentsId)
         {
             if (ModelState.IsValid)
             {

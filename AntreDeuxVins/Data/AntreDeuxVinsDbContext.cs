@@ -63,7 +63,7 @@ namespace AntreDeuxVins.Data
                 .HasOne(u => u.Role)
                 .WithMany(r => r.Utilisateurs);
             modelBuilder.Entity<LocalizableEntityTranslation>()
-                .HasKey(l => new { l.LocalizableEntityId, l.LanguageId });
+                .HasKey(l => new { l.LocalizableEntityId, l.LanguageId, l.PrimaryKeyValue });
             modelBuilder.Entity<LocalizableEntityTranslation>()
                 .HasOne(l => l.LocalizableEntity)
                 .WithMany(l => l.LocalizableEntityTranslations)

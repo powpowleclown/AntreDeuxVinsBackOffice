@@ -101,13 +101,13 @@ namespace AntreDeuxVins.Migrations
 
                     b.Property<int>("LanguageId");
 
-                    b.Property<string>("FieldName");
-
                     b.Property<int>("PrimaryKeyValue");
+
+                    b.Property<string>("FieldName");
 
                     b.Property<string>("Text");
 
-                    b.HasKey("LocalizableEntityId", "LanguageId");
+                    b.HasKey("LocalizableEntityId", "LanguageId", "PrimaryKeyValue");
 
                     b.HasIndex("LanguageId");
 

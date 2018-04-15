@@ -11,8 +11,8 @@ using System;
 namespace AntreDeuxVins.Migrations
 {
     [DbContext(typeof(AntreDeuxVinsDbContext))]
-    [Migration("20180415164438_Init")]
-    partial class Init
+    [Migration("20180415185747_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,13 +102,13 @@ namespace AntreDeuxVins.Migrations
 
                     b.Property<int>("LanguageId");
 
-                    b.Property<string>("FieldName");
-
                     b.Property<int>("PrimaryKeyValue");
+
+                    b.Property<string>("FieldName");
 
                     b.Property<string>("Text");
 
-                    b.HasKey("LocalizableEntityId", "LanguageId");
+                    b.HasKey("LocalizableEntityId", "LanguageId", "PrimaryKeyValue");
 
                     b.HasIndex("LanguageId");
 

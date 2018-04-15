@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AntreDeuxVins.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -152,13 +152,13 @@ namespace AntreDeuxVins.Migrations
                 {
                     LocalizableEntityId = table.Column<int>(nullable: false),
                     LanguageId = table.Column<int>(nullable: false),
-                    FieldName = table.Column<string>(nullable: true),
                     PrimaryKeyValue = table.Column<int>(nullable: false),
+                    FieldName = table.Column<string>(nullable: true),
                     Text = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LocalizableEntityTranslations", x => new { x.LocalizableEntityId, x.LanguageId });
+                    table.PrimaryKey("PK_LocalizableEntityTranslations", x => new { x.LocalizableEntityId, x.LanguageId, x.PrimaryKeyValue });
                     table.ForeignKey(
                         name: "FK_LocalizableEntityTranslations_Languages_LanguageId",
                         column: x => x.LanguageId,
