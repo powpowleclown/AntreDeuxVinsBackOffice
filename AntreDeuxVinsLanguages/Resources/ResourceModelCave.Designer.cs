@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AntreDeuxVins.Resources {
+namespace AntreDeuxVinsLanguages.Resources {
     using System;
     
     

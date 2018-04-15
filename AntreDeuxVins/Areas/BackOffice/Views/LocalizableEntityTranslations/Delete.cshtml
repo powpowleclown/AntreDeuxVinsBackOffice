@@ -1,0 +1,60 @@
+﻿@model AntreDeuxVinsModel.LocalizableEntityTranslation
+
+@{
+    ViewData["Title"] = Localizer["Delete"] + "-" + Localizer["EntityTranslation"];
+}
+
+<h2>@Localizer["Delete"]</h2>
+
+<h3>@Localizer["DeleteMsg"]</h3>
+<div>
+    <h4>@Localizer["EntityTranslation"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryKeyValue)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryKeyValue)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FieldName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Language)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Language.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalizableEntity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LocalizableEntity.EntityName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" name="id" value="@Model.LocalizableEntityId" />
+        <input type="hidden" name="idL" value="@Model.LanguageId" />
+        <input type="hidden" name="Parent" value="@ViewBag.Parent" />
+        <input type="submit" value="@Localizer["Delete"]" class="btn btn-default" /> |
+        @if (@ViewBag.Parent == null)
+    {
+        <a asp-action="Index">@Localizer["Back"]</a>
+}
+else
+{
+    <a asp-action="Details" asp-controller="LocalizableEntities" asp-route-id="@ViewBag.Parent" asp-area="BackOffice">@Localizer["Back"]</a>
+}
+    </form>
+</div>

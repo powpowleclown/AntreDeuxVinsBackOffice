@@ -223,6 +223,51 @@ namespace AntreDeuxVins.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Entité.
+        /// </summary>
+        public static string Entity {
+            get {
+                return ResourceManager.GetString("Entity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Entité par Local.
+        /// </summary>
+        public static string EntityLanguage {
+            get {
+                return ResourceManager.GetString("EntityLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Entités.
+        /// </summary>
+        public static string Entitys {
+            get {
+                return ResourceManager.GetString("Entitys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Traduction Entités.
+        /// </summary>
+        public static string EntitysTranslation {
+            get {
+                return ResourceManager.GetString("EntitysTranslation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Traduction Entité.
+        /// </summary>
+        public static string EntityTranslation {
+            get {
+                return ResourceManager.GetString("EntityTranslation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Accueil.
         /// </summary>
         public static string Home {
@@ -264,6 +309,24 @@ namespace AntreDeuxVins.Resources {
         public static string Index {
             get {
                 return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Locale.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Locales.
+        /// </summary>
+        public static string Languages {
+            get {
+                return ResourceManager.GetString("Languages", resourceCulture);
             }
         }
         

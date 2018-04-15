@@ -1,0 +1,70 @@
+﻿@model AntreDeuxVinsModel.LocalizableEntityTranslation
+
+@{
+    ViewData["Title"] = Localizer["Edit"] + "-" + Localizer["EntityTranslation"];
+}
+
+<h2>@Localizer["Edit"]</h2>
+
+<h4>@Localizer["EntityTranslation"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="Parent" value="@ViewBag.Parent" />
+            @if (@ViewBag.Parent != null)
+            {
+                <label asp-for="LocalizableEntity" class="control-label"></label>
+                <input asp-for="LocalizableEntityId" class="form-control" disabled="disabled"/>
+                <span asp-validation-for="LocalizableEntityId" class="text-danger"></span>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="LocalizableEntity" class="control-label"></label>
+                    <select asp-for="LocalizableEntityId" asp-items="ViewBag.Entitys" class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                    <span asp-validation-for="LocalizableEntityId" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="PrimaryKeyValue" class="control-label"></label>
+                <input asp-for="PrimaryKeyValue" class="form-control" />
+                <span asp-validation-for="PrimaryKeyValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FieldName" class="control-label"></label>
+                <input asp-for="FieldName" class="form-control" />
+                <span asp-validation-for="FieldName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Language" class="control-label"></label>
+                <select asp-for="LanguageId" asp-items="ViewBag.Languages" class="form-control">
+                </select>
+                <span asp-validation-for="LanguageId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @if (@ViewBag.Parent == null)
+    {
+        <a asp-action="Index">@Localizer["Back"]</a>
+    }
+    else
+    {
+        <a asp-action="Details" asp-controller="LocalizableEntities" asp-route-id="@ViewBag.Parent" asp-area="BackOffice">@Localizer["Back"]</a>
+    }
+</div>
+

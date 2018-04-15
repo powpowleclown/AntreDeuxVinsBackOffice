@@ -13,19 +13,25 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
-    public class RegionsController : Controller
+    public class RegionsController : TranslateController
     {
         private readonly AntreDeuxVinsDbContext _context;
 
         public RegionsController(AntreDeuxVinsDbContext context)
         {
             _context = context;
+            _localization = new Localization(_context);
         }
 
         // GET: BackOffice/Regions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Regions.Include(r => r.Pays).ToListAsync());
+            var regions = await _context.Regions.Include(r => r.Pays).ToListAsync();
+            foreach (var region in regions)
+            {
+                _localization.ApplyTranslate(region);
+            }
+            return View(regions);
         }
 
         // GET: BackOffice/Regions/Details/5
@@ -42,13 +48,14 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 return NotFound();
             }
             ViewBag.Parent = Parent;
+            _localization.ApplyTranslate(region);
             return View(region);
         }
 
         // GET: BackOffice/Regions/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
+            ViewBag.Pays = _localization.ApplyTranslateSelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
             return View();
         }
 
@@ -65,7 +72,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
+            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom", region.PaysId);
             return View(region);
         }
 
@@ -95,7 +102,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 return RedirectToAction("Details", "Pays", new { id = region.PaysId, Area = "BackOffice" });
             }
             ViewBag.PaysId = region.PaysId;
-            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
+            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom", region.PaysId);
             return View(region);
         }
 
@@ -114,6 +121,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             }
             ViewBag.Parent = Parent;
             ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
+            _localization.ApplyTranslate(region);
             return View(region);
         }
 
@@ -161,7 +169,8 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 }
             }
             ViewBag.Parent = Parent;
-            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
+            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom", region.PaysId);
+            _localization.ApplyTranslate(region);
             return View(region);
         }
 
@@ -179,6 +188,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 return NotFound();
             }
             ViewBag.Parent = Parent;
+            _localization.ApplyTranslate(region);
             return View(region);
         }
 

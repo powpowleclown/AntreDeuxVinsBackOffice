@@ -28,3 +28,9 @@ C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netco
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ErrorMessageResource.resources
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ErrorMessageResource.en.resources
 C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.csprojResolveAssemblyReference.cache
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ResourceModelEntity.resources
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ResourceModelEntityTranslation.resources
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ResourceModelLanguage.resources
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ResourceModelEntity.en.resources
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ResourceModelEntityTranslation.en.resources
+C:\Users\rfair\source\repos\AntreDeuxVins\AntreDeuxVinsLanguages\obj\Debug\netcoreapp2.0\AntreDeuxVinsLanguages.Resources.ResourceModelLanguage.en.resources

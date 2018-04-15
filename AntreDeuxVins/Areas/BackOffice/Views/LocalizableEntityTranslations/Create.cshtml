@@ -1,0 +1,48 @@
+﻿@model AntreDeuxVinsModel.LocalizableEntityTranslation
+
+@{
+    ViewData["Title"] = Localizer["Create"] + "-" + Localizer["EntityTranslation"];
+}
+
+<h2>@Localizer["Create"]</h2>
+
+<h4>@Localizer["EntityTranslation"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LocalizableEntityId" class="control-label"></label>
+                <select asp-for="LocalizableEntityId" class ="form-control" asp-items="ViewBag.LocalizableEntityId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrimaryKeyValue" class="control-label"></label>
+                <input asp-for="PrimaryKeyValue" class="form-control" />
+                <span asp-validation-for="PrimaryKeyValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FieldName" class="control-label"></label>
+                <input asp-for="FieldName" class="form-control" />
+                <span asp-validation-for="FieldName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LanguageId" class="control-label"></label>
+                <select asp-for="LanguageId" class ="form-control" asp-items="ViewBag.LanguageId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Create"]" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Localizer["Back"]</a>
+</div>
+

@@ -13,19 +13,20 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
-    public class AlimentsController : Controller
+    public class AlimentsController : TranslateController
     {
         private readonly AntreDeuxVinsDbContext _context;
 
         public AlimentsController(AntreDeuxVinsDbContext context)
         {
             _context = context;
+            _localization = new Localization(_context);
         }
 
         // GET: BackOffice/Aliments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Aliments.ToListAsync());
+            return View(_localization.ApplyTranslateList(await _context.Aliments.ToListAsync()));
         }
 
         // GET: BackOffice/Aliments/Details/5
@@ -44,6 +45,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             }
             ViewBag.ParentParent = ParentParent;
             ViewBag.Parent = Parent;
+            _localization.ApplyTranslate(aliment);
             return View(aliment);
         }
 
@@ -114,6 +116,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             }
             ViewBag.ParentParent = ParentParent;
             ViewBag.Parent = Parent;
+            _localization.ApplyTranslate(aliment);
             return View(aliment);
         }
 
@@ -158,6 +161,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             }
             ViewBag.ParentParent = ParentParent;
             ViewBag.Parent = Parent;
+            _localization.ApplyTranslate(aliment);
             return View(aliment);
         }
 
@@ -177,6 +181,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             }
             ViewBag.ParentParent = ParentParent;
             ViewBag.Parent = Parent;
+            _localization.ApplyTranslate(aliment);
             return View(aliment);
         }
 

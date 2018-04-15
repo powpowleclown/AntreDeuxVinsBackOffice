@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AntreDeuxVins.Controllers
 {
     [Authorize]
-    public class CavesController : Controller
+    public class CavesController : TranslateController
     {
         private readonly AntreDeuxVinsDbContext _context;
         private readonly UserManager<Utilisateur> _userManager;
@@ -22,6 +22,7 @@ namespace AntreDeuxVins.Controllers
         {
             _context = context;
             _userManager = userManager;
+            _localization = new Localization(_context);
         }
 
         // GET: Caves/Details/5
@@ -33,6 +34,7 @@ namespace AntreDeuxVins.Controllers
             {
                 return RedirectToAction(nameof(Create));
             }
+            _localization.ApplyTranslateCave(cave);
             return View(cave);
         }
 

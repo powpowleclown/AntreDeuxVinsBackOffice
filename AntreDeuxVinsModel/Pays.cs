@@ -9,9 +9,9 @@ namespace AntreDeuxVinsModel
     {
         public int Id { get; set; }
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AntreDeuxVinsLanguages.Resources.ErrorMessageResource))]
-        [Display(Name = "Nom", ResourceType = typeof(AntreDeuxVins.Resources.ResourceModelPays))]
+        [Display(Name = "Nom", ResourceType = typeof(AntreDeuxVinsLanguages.Resources.ResourceModelPays))]
         public string Nom { get; set; }
-        [Display(Name = "Regions", ResourceType = typeof(AntreDeuxVins.Resources.ResourceModelPays))]
+        [Display(Name = "Regions", ResourceType = typeof(AntreDeuxVinsLanguages.Resources.ResourceModelPays))]
         public ICollection<Region> Regions { get; set; }
         public Pays()
         {

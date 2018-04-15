@@ -130,7 +130,7 @@ namespace AntreDeuxVins.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     Prenom = table.Column<string>(nullable: true),
-                    RoleId = table.Column<Guid>(nullable: true),
+                    RoleId1 = table.Column<Guid>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true)
@@ -139,8 +139,8 @@ namespace AntreDeuxVins.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
+                        name: "FK_AspNetUsers_AspNetRoles_RoleId1",
+                        column: x => x.RoleId1,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -153,7 +153,6 @@ namespace AntreDeuxVins.Migrations
                     LocalizableEntityId = table.Column<int>(nullable: false),
                     LanguageId = table.Column<int>(nullable: false),
                     FieldName = table.Column<string>(nullable: true),
-                    Id = table.Column<int>(nullable: false),
                     PrimaryKeyValue = table.Column<int>(nullable: false),
                     Text = table.Column<string>(nullable: true)
                 },
@@ -411,9 +410,9 @@ namespace AntreDeuxVins.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_RoleId",
+                name: "IX_AspNetUsers_RoleId1",
                 table: "AspNetUsers",
-                column: "RoleId");
+                column: "RoleId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Caves_UtilisateurId",

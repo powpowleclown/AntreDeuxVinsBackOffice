@@ -13,19 +13,20 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
-    public class PaysController : Controller
+    public class PaysController : TranslateController
     {
         private readonly AntreDeuxVinsDbContext _context;
 
         public PaysController(AntreDeuxVinsDbContext context)
         {
             _context = context;
+            _localization = new Localization(_context);
         }
 
         // GET: BackOffice/Pays
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pays.ToListAsync());
+            return View(_localization.ApplyTranslateList(await _context.Pays.ToListAsync()));
         }
 
         // GET: BackOffice/Pays/Details/5
@@ -41,7 +42,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
-
+            _localization.ApplyTranslate(pays);
             return View(pays);
         }
 
@@ -80,6 +81,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
+            _localization.ApplyTranslate(pays);
             return View(pays);
         }
 
@@ -115,6 +117,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            _localization.ApplyTranslate(pays);
             return View(pays);
         }
 
@@ -132,7 +135,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
-
+            _localization.ApplyTranslate(pays);
             return View(pays);
         }
 

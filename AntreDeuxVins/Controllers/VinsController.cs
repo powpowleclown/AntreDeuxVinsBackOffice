@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AntreDeuxVins.Controllers
 {
     [Authorize]
-    public class VinsController : Controller
+    public class VinsController : TranslateController
     {
         private readonly AntreDeuxVinsDbContext _context;
         private readonly UserManager<Utilisateur> _userManager;
@@ -22,6 +22,7 @@ namespace AntreDeuxVins.Controllers
         {
             _context = context;
             _userManager = userManager;
+            _localization = new Localization(_context);
         }
 
         // GET: Vins/Details/5
@@ -37,7 +38,9 @@ namespace AntreDeuxVins.Controllers
             {
                 return NotFound();
             }
-
+            //Translate
+            _localization.ApplyTranslate(vin.Couleur);
+            _localization.ApplyTranslate(vin.Pays);
             return View(vin);
         }
 
@@ -49,10 +52,10 @@ namespace AntreDeuxVins.Controllers
             }
 
             ViewBag.CaveId = id;
-            ViewBag.Couleurs = new SelectList(await _context.Couleurs.ToListAsync(), "Id", "Nom");
-            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
+            ViewBag.Couleurs = _localization.ApplyTranslateSelectList(await _context.Couleurs.ToListAsync(), "Id", "Nom");
+            ViewBag.Pays = _localization.ApplyTranslateSelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
             ViewBag.Regions = new SelectList(await _context.Regions.ToListAsync(), "Id", "Nom");
-            ViewBag.Aliments = new SelectList(await _context.Aliments.ToListAsync(), "Id", "Nom");
+            ViewBag.Aliments = _localization.ApplyTranslateSelectList(await _context.Aliments.ToListAsync(), "Id", "Nom");
             return View();
         }
 
@@ -74,10 +77,10 @@ namespace AntreDeuxVins.Controllers
                 return RedirectToAction("Details", "Caves");
             }
             ViewBag.CaveId = vin.CaveId;
-            ViewBag.Couleurs = new SelectList(await _context.Couleurs.ToListAsync(), "Id", "Nom");
-            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
-            ViewBag.Regions = new SelectList(await _context.Regions.ToListAsync(), "Id", "Nom");
-            ViewBag.Aliments = new SelectList(await _context.Aliments.ToListAsync(), "Id", "Nom");
+            ViewBag.Couleurs = _localization.ApplyTranslateSelectList(await _context.Couleurs.ToListAsync(), "Id", "Nom", vin.CouleurId);
+            ViewBag.Pays = _localization.ApplyTranslateSelectList(await _context.Pays.ToListAsync(), "Id", "Nom", vin.PaysId);
+            ViewBag.Regions = new SelectList(await _context.Regions.ToListAsync(), "Id", "Nom", vin.RegionId);
+            ViewBag.Aliments = _localization.ApplyTranslateSelectList(await _context.Aliments.ToListAsync(), "Id", "Nom");
             return View(vin);
         }
 
@@ -95,10 +98,10 @@ namespace AntreDeuxVins.Controllers
                 return NotFound();
             }
             ViewBag.CaveId = vin.CaveId;
-            ViewBag.Couleurs = new SelectList(await _context.Couleurs.ToListAsync(), "Id", "Nom");
-            ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
+            ViewBag.Couleurs = _localization.ApplyTranslateSelectList(await _context.Couleurs.ToListAsync(), "Id", "Nom");
+            ViewBag.Pays = _localization.ApplyTranslateSelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
             ViewBag.Regions = new SelectList(await _context.Regions.ToListAsync(), "Id", "Nom");
-            ViewBag.Aliments = new SelectList(await _context.Aliments.ToListAsync(), "Id", "Nom");
+            ViewBag.Aliments = _localization.ApplyTranslateSelectList(await _context.Aliments.ToListAsync(), "Id", "Nom");
             ViewBag.VinAliments = await _context.VinAlments.Where(va => va.VinId == vin.Id).AsNoTracking().Select(va => va.AlimentId).ToListAsync();
             return View(vin);
         }
@@ -141,10 +144,10 @@ namespace AntreDeuxVins.Controllers
                     }
                 }
                 ViewBag.CaveId = vin.CaveId;
-                ViewBag.Couleurs = new SelectList(await _context.Couleurs.ToListAsync(), "Id", "Nom");
-                ViewBag.Pays = new SelectList(await _context.Pays.ToListAsync(), "Id", "Nom");
-                ViewBag.Regions = new SelectList(await _context.Regions.ToListAsync(), "Id", "Nom");
-                ViewBag.Aliments = new SelectList(await _context.Aliments.ToListAsync(), "Id", "Nom");
+                ViewBag.Couleurs = _localization.ApplyTranslateSelectList(await _context.Couleurs.ToListAsync(), "Id", "Nom", vin.CouleurId);
+                ViewBag.Pays = _localization.ApplyTranslateSelectList(await _context.Pays.ToListAsync(), "Id", "Nom", vin.PaysId);
+                ViewBag.Regions = new SelectList(await _context.Regions.ToListAsync(), "Id", "Nom", vin.RegionId);
+                ViewBag.Aliments = _localization.ApplyTranslateSelectList(await _context.Aliments.ToListAsync(), "Id", "Nom");
                 ViewBag.VinAliments = await _context.VinAlments.Where(va => va.VinId == vin.Id).AsNoTracking().Select(va => va.AlimentId).ToListAsync();
                 return RedirectToAction("Details", "Caves");
             }
@@ -164,6 +167,9 @@ namespace AntreDeuxVins.Controllers
             {
                 return NotFound();
             }
+            //Translate
+            _localization.ApplyTranslate(vin.Couleur);
+            _localization.ApplyTranslate(vin.Pays);
             return View(vin);
         }
 

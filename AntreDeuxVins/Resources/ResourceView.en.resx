@@ -255,4 +255,25 @@
   <data name="Connexion" xml:space="preserve">
     <value>Connect</value>
   </data>
+  <data name="Entity" xml:space="preserve">
+    <value>Entity</value>
+  </data>
+  <data name="EntityLanguage" xml:space="preserve">
+    <value>Entity By Language</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Entitys" xml:space="preserve">
+    <value>Entities</value>
+  </data>
+  <data name="Languages" xml:space="preserve">
+    <value>Locals</value>
+  </data>
+  <data name="EntitysTranslation" xml:space="preserve">
+    <value>Entities Translation</value>
+  </data>
+  <data name="EntityTranslation" xml:space="preserve">
+    <value>Entity Translation</value>
+  </data>
 </root>

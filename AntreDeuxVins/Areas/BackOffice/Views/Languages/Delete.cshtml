@@ -1,0 +1,33 @@
+﻿@model AntreDeuxVinsModel.Language
+
+@{
+    ViewData["Title"] = Localizer["Delete"]+"-"+ Localizer["Language"];
+}
+
+<h2>@Localizer["Delete"]</h2>
+
+<h3>@Localizer["DeleteMsg"]</h3>
+<div>
+    <h4>@Localizer["Language"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="@Localizer["Delete"]" class="btn btn-default" /> |
+        <a asp-action="Index">@Localizer["Back"]</a>
+    </form>
+</div>

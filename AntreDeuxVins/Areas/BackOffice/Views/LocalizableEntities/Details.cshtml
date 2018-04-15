@@ -1,0 +1,32 @@
+﻿@model AntreDeuxVinsModel.LocalizableEntity
+
+@{
+    ViewData["Title"] = Localizer["Details"] + "-" + Localizer["Entity"];
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["Entity"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EntityName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EntityName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryKeyFieldName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryKeyFieldName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">@Localizer["Edit"]</a> |
+    <a asp-action="Index">@Localizer["Back"]</a>
+</div>
+@await Html.PartialAsync("/Areas/BackOffice/Views/LocalizableEntities/EntityLanguages.cshtml", Model.LocalizableEntityTranslations, new ViewDataDictionary(this.ViewData) { { "EntityId", @Model.Id }})
+

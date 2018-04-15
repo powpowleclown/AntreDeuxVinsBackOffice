@@ -1,0 +1,55 @@
+﻿@model AntreDeuxVinsModel.LocalizableEntityTranslation
+
+@{
+    ViewData["Title"] = Localizer["Details"] + "-" + Localizer["EntityTranslation"];
+}
+
+<h2>@Localizer["Details"]</h2>
+
+<div>
+    <h4>@Localizer["EntityTranslation"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryKeyValue)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryKeyValue)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FieldName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Language)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Language.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalizableEntity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LocalizableEntity.EntityName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.LocalizableEntityId" asp-route-idL="@Model.LanguageId" asp-route-Parent="@ViewBag.Parent">@Localizer["Edit"]</a> |
+    @if (@ViewBag.Parent == null)
+    {
+        <a asp-action="Index">@Localizer["Back"]</a>
+    }
+    else
+    {
+        <a asp-action="Details" asp-controller="LocalizableEntities" asp-route-id="@ViewBag.Parent" asp-area="BackOffice">@Localizer["Back"]</a>
+    }
+</div>

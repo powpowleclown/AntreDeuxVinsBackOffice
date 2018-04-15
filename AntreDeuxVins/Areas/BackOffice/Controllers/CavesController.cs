@@ -14,13 +14,14 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
-    public class CavesController : Controller
+    public class CavesController : TranslateController
     {
         private readonly AntreDeuxVinsDbContext _context;
 
         public CavesController(AntreDeuxVinsDbContext context)
         {
             _context = context;
+            _localization = new Localization(_context);
         }
 
         // GET: BackOffice/Caves
@@ -41,7 +42,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
-
+            _localization.ApplyTranslateCave(cave);
             return View(cave);
         }
 
@@ -66,7 +67,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Utilisateurs = new SelectList(await _context.Utilisateurs.ToListAsync(), "Id", "UserName");
+            ViewBag.Utilisateurs = new SelectList(await _context.Utilisateurs.ToListAsync(), "Id", "UserName", cave.UtilisateurId);
             return View(cave);
         }
 
@@ -119,7 +120,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Utilisateurs = new SelectList(await _context.Utilisateurs.ToListAsync(), "Id", "UserName");
+            ViewBag.Utilisateurs = new SelectList(await _context.Utilisateurs.ToListAsync(), "Id", "UserName", cave.UtilisateurId);
             return View(cave);
         }
 
@@ -136,7 +137,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
-
+            _localization.ApplyTranslateCave(cave);
             return View(cave);
         }
 

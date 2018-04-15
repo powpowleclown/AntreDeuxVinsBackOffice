@@ -8,24 +8,28 @@ using Microsoft.EntityFrameworkCore;
 using AntreDeuxVins.Data;
 using AntreDeuxVinsModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 
 namespace AntreDeuxVins.Areas.BackOffice.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("BackOffice")]
-    public class CouleursController : Controller
+    public class CouleursController : TranslateController
     {
         private readonly AntreDeuxVinsDbContext _context;
 
         public CouleursController(AntreDeuxVinsDbContext context)
         {
+
             _context = context;
+            _localization = new Localization(_context);
+
         }
 
         // GET: BackOffice/Couleurs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Couleurs.ToListAsync());
+            return View(_localization.ApplyTranslateList(await _context.Couleurs.ToListAsync()));
         }
 
         // GET: BackOffice/Couleurs/Details/5
@@ -42,7 +46,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
-
+            _localization.ApplyTranslate(couleur);
             return View(couleur);
         }
 
@@ -81,6 +85,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
+            _localization.ApplyTranslate(couleur);
             return View(couleur);
         }
 
@@ -116,6 +121,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            _localization.ApplyTranslate(couleur);
             return View(couleur);
         }
 
@@ -133,7 +139,7 @@ namespace AntreDeuxVins.Areas.BackOffice.Controllers
             {
                 return NotFound();
             }
-
+            _localization.ApplyTranslate(couleur);
             return View(couleur);
         }
 

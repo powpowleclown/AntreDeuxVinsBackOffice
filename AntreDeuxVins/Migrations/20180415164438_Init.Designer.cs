@@ -11,7 +11,7 @@ using System;
 namespace AntreDeuxVins.Migrations
 {
     [DbContext(typeof(AntreDeuxVinsDbContext))]
-    [Migration("20180412091801_Init")]
+    [Migration("20180415164438_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,8 +103,6 @@ namespace AntreDeuxVins.Migrations
                     b.Property<int>("LanguageId");
 
                     b.Property<string>("FieldName");
-
-                    b.Property<int>("Id");
 
                     b.Property<int>("PrimaryKeyValue");
 
@@ -208,7 +206,7 @@ namespace AntreDeuxVins.Migrations
 
                     b.Property<string>("Prenom");
 
-                    b.Property<Guid?>("RoleId");
+                    b.Property<Guid?>("RoleId1");
 
                     b.Property<string>("SecurityStamp");
 
@@ -227,7 +225,7 @@ namespace AntreDeuxVins.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId1");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -400,7 +398,7 @@ namespace AntreDeuxVins.Migrations
                 {
                     b.HasOne("AntreDeuxVinsModel.Role", "Role")
                         .WithMany("Utilisateurs")
-                        .HasForeignKey("RoleId");
+                        .HasForeignKey("RoleId1");
                 });
 
             modelBuilder.Entity("AntreDeuxVinsModel.Vin", b =>
